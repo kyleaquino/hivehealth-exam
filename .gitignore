@@ -1,0 +1,81 @@
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Virtual environment
+venv/
+env/
+ENV/
+*.venv
+*.env
+
+# Test and coverage
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+
+# Pytest
+.cache/
+pytest_cache/
+
+# Mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# mypy
+*.pyd
+*.pyc
+*.pyo
+
+# Pyre type checker
+.pyre/
+
+# VSCode settings
+.vscode/
+
+# IDE and editor specific
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Python virtual environments
+venv/
+.env/
+*.venv
+
+# FastAPI related
+# If you're using an ASGI server, such as uvicorn, you might have socket files
+*.sock
+*.pid
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# System Files
+*.swp
+*.swo
+*.swn
+
+# Environment files
+.env
+.env.*
+
+# Logs
+*.log
+*.out
+*.err
