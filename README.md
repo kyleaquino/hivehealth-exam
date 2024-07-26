@@ -1,39 +1,59 @@
-# Board Game Geek Similarity Score API
+# BGG User Comparison API
 
-This API provides an endpoint to calculate the similarity score between two Board Game Geek users based on their top 100 rated games.
+This project provides a FastAPI-based web service that calculates the similarity score between the top 100 rated games of two Board Game Geek (BGG) users. The service fetches users' game collections and determines the overlap in their top-rated games.
+
+## Table of Contents
+
+- [BGG User Comparison API](#hivehealth-exam)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Run the Application](#run-the-application)
+    - [API Endpoint](#api-endpoint)
+  - [Directory Structure](#directory-structure)
+  - [Logging](#logging)
+  - [Testing](#testing)
 
 ## Features
 
-- **Calculate Similarity Score**: Compare the top games of two users and calculate a similarity score.
+- Fetches top 100 rated games for a BGG user.
+- Computes similarity score between two users based on their top-rated games.
+- Logs detailed information about the API requests and errors.
 
-## Prerequisites
+## Requirements
 
 - Python 3.11+
-- pip
+- FastAPI
+- Requests
+- Uvicorn
 
 ## Installation
 
-1. **Clone the repository**:
+1. Clone the repository:
 
    ```bash
-   git clone <repository_url>
-   cd <repository_directory>
+   https://github.com/kyleaquino/hivehealth-exam.git
+   cd hivehealth-exam
    ```
 
-2. **Create and activate a virtual environment**:
+2. Create and activate a virtual environment:
 
    ```bash
-   python -m venv venv source venv/bin/activate
+   python -m venv venv
    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
    ```
 
-3. **Install the required packages**:
+3. Install the dependencies:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-## Running the Development Server
+## Usage
+
+### Run the Application
 
 To start the FastAPI server, run the following command:
 
@@ -41,36 +61,74 @@ To start the FastAPI server, run the following command:
 fastapi dev main.py
 ```
 
-## Endpoints
+### API Endpoint
 
-### Calculate Similarity Score
+#### Calculate Similarity Score
 
-**Endpoint**: `/calculate-similarity-score`
+- **URL**: `/calculate-similarity-score`
+- **Method**: `POST`
+- **Content-Type**: `application/json`
+- **Request Body**:
 
-**Method**: `POST`
+  ```json
+  {
+    "username1": "user1",
+    "username2": "user2"
+  }
+  ```
 
-**Description**: Calculates the similarity score between two users based on their top 100 games.
+- **Response**:
 
-**Request Body**:
+  ```json
+  {
+    "similarity_score": "0.75"
+  }
+  ```
 
-```json
-{ "username1": "user1", "username2": "user2" }
+You can test the endpoint using `curl`:
+
+```bash
+curl -X POST "http://127.0.0.1:8000/calculate-similarity-score" -H "Content-Type: application/json" -d '{"username1": "user1", "username2": "user2"}'
 ```
 
-**Response**:
+## Directory Structure
 
-```json
-{ "similarity_score": 75.00 }`
 ```
+hivehealth-exam/
+│
+├── main.py
+├── requirements.txt
+├── .pylintrc
+├── .gitignore
+├── README.md
+├── logs/
+├── scripts/
+│   └── bgg_compare_users.py
+|   └── README.md
+├── services/
+│   └── bgg_service.py
+|   └── README.md
+└── tests/
+    └── test_bgg_service.py
+|   └── README.md
+```
+
+Important Files:
+
+- **main.py**: The main FastAPI application.
+- **requirements.txt**: Project dependencies.
+- **services/bgg_service.py**: Contains classes and methods to interact with the BGG XML API.
+- **scripts/bgg_compare_users.py**: A script to compare two users' game tastes from the command line.
+- **tests/test_bgg_service.py**: Unit tests for the `bgg_service` module.
+
+## Logging
+
+Logging is configured to output debug-level logs to `logs/app.log`. Logs include timestamps, log levels, and messages.
 
 ## Testing
 
-To run the tests, use the following command:
+Unit tests are located in the `tests` directory. To run the tests, use:
 
 ```bash
 pytest
 ```
-
-## Logging
-
-The API uses Python's built-in logging module to log information. By default, logs are printed to the console. You can adjust the logging configuration in `main.py` as needed.
